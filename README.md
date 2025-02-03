@@ -1,6 +1,7 @@
 # solving-mdps
 Homework on value and policy iteration.
 
+Turn in one written report per group via Canvas with all group members names on the report. Also turn in your code.
 
 
 ## Part 1: 
