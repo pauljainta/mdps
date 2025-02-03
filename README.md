@@ -5,6 +5,7 @@ Turn in one written report per group via Canvas with all group members names on 
 
 This section of the Sutton and Barto RL book is a good supplement to go along with the class slides:
 http://incompleteideas.net/book/ebook/node40.html
+Note that they assume the most general form of a stochastic policy (outputs a probability distribution over actions given a state). In this homework we will only consider deterministic policies. We don't lose any optimality by doing this since for any MDP, there is always an optimal deterministic policy.
 
 
 ## Part 1: 
