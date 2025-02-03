@@ -3,6 +3,9 @@ Homework on value and policy iteration.
 
 Turn in one written report per group via Canvas with all group members names on the report. Also turn in your code.
 
+This section of the Sutton and Barto RL book is a good supplement to go along with the class slides:
+http://incompleteideas.net/book/ebook/node40.html
+
 
 ## Part 1: 
 Finish `homework3.py` by filling in the relevant methods in `mdp_utils.py`. We've provided you with some gridworld starter code and a simple MDP class in `mdp.py`.
