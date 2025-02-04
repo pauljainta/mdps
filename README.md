@@ -9,7 +9,7 @@ Note that they assume the most general form of a stochastic policy (outputs a pr
 
 ## Setup
 Clone/Download this repository. Set up a virtual environment (conda, pyvenv) if you wish. Then install numpy. 
-You can run `conda install numpy`, `pip install numpy`, `pip3 install numpy`.
+You can run `conda install numpy`, `pip install numpy`, `pip3 install numpy`. If you want you can just use the same conda env from homework 1 since this will already have numpy installed.
 
 ## Part 1: 
 Finish `homework3.py` by filling in the relevant methods in `mdp_utils.py`. We've provided you with some gridworld starter code and a simple MDP class in `mdp.py`.
