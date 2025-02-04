@@ -13,7 +13,7 @@ You can run `conda install numpy`, `pip install numpy`, `pip3 install numpy`. If
 
 ## Part 1: 
 Finish `homework3.py` by filling in the relevant methods in `mdp_utils.py`. We've provided you with some gridworld starter code and a simple MDP class in `mdp.py`.
-You will need to access the properties of the MDP class to solve the problems (i.e. you need to query the env’s transition probabilities, action space, rewards, etc). Read through the entire `mdp.py` file before you start working on `mdp_utils.py`.
+You will need to access the properties of the MDP class to solve the problems (i.e. you need to query the env’s transition probabilities, action space, rewards, etc). Read through the entire `mdp.py` file before you start working on `mdp_utils.py`. There are also some helper functions provided for you in `mdp_utils.py`.
 
 When you finish, you should get the same results from both Value Iteration and Policy Iteration.
 
