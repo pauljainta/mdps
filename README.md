@@ -20,4 +20,4 @@ When you finish, you should get the same results from both Value Iteration and P
 In your report include the output of `homework3.py`.
 
 ## Part 2:
-Play around with the MDP and change some things and report on what happens. For example, maybe change the reward function, change the noise in the MDP, or change the terminal states. Does the change in the optimal policy make sense? Report and discuss two different changes you made that resulted in a different optimal policy than you got in Part 1. 
+You will now get to have fun and build intutioon by playing around with some different MDPs. You can start by making a copy of the method `gen_simple_world()` (e.g., make a `gen_simple_world2()` method) and make changes/tweaks from there. For example, maybe change the reward function, change the noise in the MDP, or change the terminal states. Does the change in the optimal policy make sense? Report and discuss two different changes you made that resulted in a different optimal policy than you got in Part 1. 
