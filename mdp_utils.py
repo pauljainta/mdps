@@ -60,80 +60,123 @@ def print_array_as_grid(array_values, env):
 
 
 def value_iteration(env, epsilon=0.0001):
-    """
-    Run value iteration to find optimal values for each state
-  :param env: the MDP
-  :param epsilon: numerical precision for values to determine stopping condition
-  :return: the vector of optimal values for each state in the MDP 
-  """
     n = env.num_states
-    V = np.zeros(n)  # could also use np.zero(n)
-    #TODO: implement value iteration
-
+    V = np.zeros(n)
+    
+    while True:
+        V_old = V.copy()
+        delta = 0
+        
+        for s in range(n):
+            if s in env.terminals:
+                V[s] = env.rewards[s]
+                continue
+                
+            # Find max value over all actions
+            max_value = float('-inf')
+            for a in range(env.num_actions):
+                value = 0
+                for next_s in range(n):
+                    value += env.transitions[s][a][next_s] * \
+                            (env.rewards[next_s] + env.gamma * V_old[next_s])
+                max_value = max(max_value, value)
+            V[s] = max_value
+            delta = max(delta, abs(V[s] - V_old[s]))
+            
+        if delta < epsilon:
+            break
+            
     return V
-
-
-
 
 def extract_optimal_policy(V, env, epsilon=0.0001):
-    """ 
-    Perform a one step lookahead to find optimal policy
-    :param V: precomputed values from value iteration
-    :param env: the MDP
-    :param epsilon: numerical precision for values to determine stopping condition
-    :return: the optimal policy
-    """
     n = env.num_states
-    optimal_policy =  get_random_policy(env) 
-    #TODO: Perform a one step lookahead to find optimal policy 
-
-
-  
+    optimal_policy = np.zeros(n, dtype=int)
+    
+    for s in range(n):
+        if s in env.terminals:
+            continue
+            
+        # Find action that maximizes value
+        max_value = float('-inf')
+        best_action = 0
+        
+        for a in range(env.num_actions):
+            value = 0
+            for next_s in range(n):
+                value += env.transitions[s][a][next_s] * \
+                        (env.rewards[next_s] + env.gamma * V[next_s])
+            if value > max_value:
+                max_value = value
+                best_action = a
+                
+        optimal_policy[s] = best_action
+        
     return optimal_policy
 
-
-
-
-
-
 def policy_evaluation(policy, env, epsilon):
-    """
-    Evalute the policy and compute values in each state when executing the policy in the mdp
-    :param policy: the policy to evaluate in the mdp
-    :param env: markov decision process where we evaluate the policy
-    :param epsilon: numerical precision desired
-    :return: values of policy under mdp
-    """
     n = env.num_states
-    V = np.zeros(n)  # could also use np.zero(n)
-    #TODO: code up policy evaluation
-
+    V = np.zeros(n)
+    
+    while True:
+        delta = 0
+        V_old = V.copy()
+        
+        for s in range(n):
+            if s in env.terminals:
+                V[s] = env.rewards[s]
+                continue
+                
+            # Compute value for current policy
+            a = policy[s]
+            value = 0
+            for next_s in range(n):
+                value += env.transitions[s][a][next_s] * \
+                        (env.rewards[next_s] + env.gamma * V_old[next_s])
+            V[s] = value
+            delta = max(delta, abs(V[s] - V_old[s]))
+            
+        if delta < epsilon:
+            break
+            
     return V
 
-
 def policy_iteration(env, epsilon=0.0001):
-    """
-    Run policy iteration to find optimal values and policy
-    :param env: markov decision process where we evaluate the policy
-    :param epsilon: numerical precision desired
-    :return: values of policy under mdp
-    """
-    #start with random policy
     n = env.num_states
-    a = env.num_actions
-    policy =  get_random_policy(env)  # Generates random policy to start policy iteration
-    # print('random policy', policy)
-
-    policy_stable = False
-    ##!!Note: this is currently an infinite loop!!##
-    while not policy_stable:
-        #run policy evaluation
-        #TODO: implement policy_evaluation
-        V = policy_evaluation(policy, env, epsilon)
-       
-        #TODO: run policy improvement
-
+    policy = get_random_policy(env)
     
+    while True:
+        # Policy evaluation
+        V = policy_evaluation(policy, env, epsilon)
+        
+        # Policy improvement
+        policy_stable = True
+        for s in range(n):
+            if s in env.terminals:
+                continue
+                
+            old_action = policy[s]
+            
+            # Find best action
+            max_value = float('-inf')
+            best_action = 0
+            
+            for a in range(env.num_actions):
+                value = 0
+                for next_s in range(n):
+                    value += env.transitions[s][a][next_s] * \
+                            (env.rewards[next_s] + env.gamma * V[next_s])
+                if value > max_value:
+                    max_value = value
+                    best_action = a
+                    
+            policy[s] = best_action
+            
+            if old_action != policy[s]:
+                policy_stable = False
+                
+        if policy_stable:
+            break
+            
     return policy, V
 
 
