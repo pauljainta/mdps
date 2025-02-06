@@ -3,7 +3,7 @@ import mdp_utils
 import numpy as np
 
 # Create homework grid world 
-grid_env = mdp.gen_simple_world()
+grid_env = mdp.gen_simple_world() #Change this function call for part 2
 
 # Visualize rewards
 print("rewards")
