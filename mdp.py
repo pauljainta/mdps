@@ -173,28 +173,32 @@ class MDP:
         self.gamma = gamma
 
 
-def gen_simple_world2(noise=0.2):
+def gen_simple_world2():
     gamma = 0.95
-    n_rows = 4
-    n_cols = 4
-    terminals = [0, 15]  # Top-left and bottom-right are terminals
-    rewards = [+5,  0,    0,   0,
-               0, -1,    0,   0,
-               0,  0,   -1,   0,
-               0,  0,    0,  +10]
+    noise = 0.2  # Increased noise
+    n_rows, n_cols = 4, 4
+    terminals = [0, 15]  # Changed terminal states
+    rewards = np.array([
+        +1, -1, 0, 0,
+        0, -1, 0, 0,
+        0, 0, 0, +2,  # Increased reward in state 11
+        0, 0, 0, -2  # New negative reward at new terminal state
+    ])
     env = MDP(n_rows, n_cols, terminals, rewards, gamma, noise)
     return env
 
 def gen_simple_world3():
-    gamma = 0.99  # More forward-looking
-    n_rows = 4
-    n_cols = 4
-    terminals = [5, 10]  # Two terminals in middle
-    rewards = [0,   0,    0,   0,
-              0,  -5,    0,   0,
-              0,   0,   +5,   0,
-              0,   0,    0,   0]
-    env = MDP(n_rows, n_cols, terminals, rewards, gamma, noise=0.05)
+    gamma = 0.95
+    noise = 0.05  # Reduced noise
+    n_rows, n_cols = 4, 4
+    terminals = [0, 3]  # Changed terminal states
+    rewards = np.array([
+        +1, 0, 0, +2,  # Increased reward in the new terminal state
+        0, 0, 0, 0,
+        0, 0, -1, 0,
+        0, -1, 0, 0
+    ])
+    env = MDP(n_rows, n_cols, terminals, rewards, gamma, noise)
     return env
 
 

@@ -1,7 +1,5 @@
 from mdp import MDP
 import numpy as np
-import math
-import copy
 
 
 def get_random_policy(env):
@@ -60,6 +58,12 @@ def print_array_as_grid(array_values, env):
 
 
 def value_iteration(env, epsilon=0.0001):
+    """
+    Run value iteration to find optimal values for each state
+  :param env: the MDP
+  :param epsilon: numerical precision for values to determine stopping condition
+  :return: the vector of optimal values for each state in the MDP 
+  """
     n = env.num_states
     V = np.zeros(n)
     
@@ -88,7 +92,13 @@ def value_iteration(env, epsilon=0.0001):
             
     return V
 
-def extract_optimal_policy(V, env, epsilon=0.0001):
+def extract_optimal_policy(V, env):
+    """ 
+    Perform a one step lookahead to find optimal policy
+    :param V: precomputed values from value iteration
+    :param env: the MDP
+    :return: the optimal policy
+    """
     n = env.num_states
     optimal_policy = np.zeros(n, dtype=int)
     
@@ -114,6 +124,13 @@ def extract_optimal_policy(V, env, epsilon=0.0001):
     return optimal_policy
 
 def policy_evaluation(policy, env, epsilon):
+    """
+    Evalute the policy and compute values in each state when executing the policy in the mdp
+    :param policy: the policy to evaluate in the mdp
+    :param env: markov decision process where we evaluate the policy
+    :param epsilon: numerical precision desired
+    :return: values of policy under mdp
+    """
     n = env.num_states
     V = np.zeros(n)
     
@@ -141,6 +158,12 @@ def policy_evaluation(policy, env, epsilon):
     return V
 
 def policy_iteration(env, epsilon=0.0001):
+    """
+    Run policy iteration to find optimal values and policy
+    :param env: markov decision process where we evaluate the policy
+    :param epsilon: numerical precision desired
+    :return: values of policy under mdp
+    """
     n = env.num_states
     policy = get_random_policy(env)
     
@@ -178,5 +201,3 @@ def policy_iteration(env, epsilon=0.0001):
             break
             
     return policy, V
-
-
